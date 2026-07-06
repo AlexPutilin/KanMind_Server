@@ -1,0 +1,30 @@
+services:
+
+  db:
+    image: postgres:17-alpine
+    container_name: kanmind_database
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  web:
+    build:
+      context: .
+      dockerfile: backend.Dockerfile
+    container_name: kanmind_backend
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    environment:
+      PYTHONUNBUFFERED: 1
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:
