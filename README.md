@@ -1,60 +1,72 @@
-# Kanmind Backend (Django + DRF)
+# Kanmind Backend
 
-This project is a backend API for a Kanban board application.
-It provides authentication, board management, task handling, and commenting features.
+Kanmind Backend is a Django REST Framework API for a Kanban-style board and task management application.
 
-The frontend is provided separately and communicates with this API via REST endpoints.
+It provides authentication, board management, task handling, task assignments, review workflows and comments.
+The frontend is hosted separately and communicates with this backend through REST API endpoints.
 
 ---
 
-## 🚀 Tech Stack
+## Tech Stack
 
 * Python
 * Django
 * Django REST Framework
+* PostgreSQL
+* Docker
+* Docker Compose
+* Gunicorn
 * Token Authentication
 
 ---
 
-## 📦 Installation
+## Live-Demo
+
+You can test the live demo here: [Kanmind Live Demo](https://kanmind.alexander-putilin.de/)
+
+## Installation
 
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/AlexPutilin/KanMind.git
-cd KanMind
+git clone https://github.com/AlexPutilin/KanMind_Server.git .
 ```
 
-2. Create and activate virtual environment:
+2. Create a .env file in the project root:
 
 ```bash
-python -m venv .venv
-source .venv/bin/activate   # Linux / Mac
-.venv\Scripts\activate      # Windows
+DEBUG=False
+SECRET_KEY=your-secret-key
+ALLOWED_HOSTS=localhost,127.0.0.1,your-domain.com
+CSRF_TRUSTED_ORIGINS=http://your-domain.com,https://your-domain.com
+
+DB_NAME=kanmind
+DB_USER=kanmind_user
+DB_PASSWORD=your-database-password
+DB_HOST=db
+DB_PORT=5432
+
+DJANGO_SUPERUSER_USERNAME=admin
+DJANGO_SUPERUSER_EMAIL=admin@example.com
+DJANGO_SUPERUSER_PASSWORD=your-admin-password
 ```
 
-3. Install dependencies:
+3. Start the Docker containers:
 
 ```bash
-pip install -r requirements.txt
+docker compose up --build
 ```
 
-4. Run migrations:
-
-```bash
-python manage.py makemigrations
-python manage.py migrate
-```
-
-5. Start the server:
-
-```bash
-python manage.py runserver
-```
+The backend container automatically runs:
+* `collectstatic`
+* `makemigrations`
+* `migrate`
+* superuser creation from `.env`
+* Gunicorn server
 
 ---
 
-## 🔐 Authentication
+## Authentication
 
 Token-based authentication is used.
 
@@ -66,7 +78,7 @@ Authorization: Token <your_token>
 
 ---
 
-## 📡 API Endpoints
+## API Endpoints
 
 ### Authentication
 
@@ -112,7 +124,7 @@ Authorization: Token <your_token>
 
 ---
 
-## 🧠 Project Structure
+## Project Structure
 
 ```
 /apps
@@ -135,7 +147,7 @@ models.py
 
 ---
 
-## ✅ Features
+## Features
 
 * User registration & login (token-based)
 * Board creation and member management
@@ -144,7 +156,3 @@ models.py
 * Permission handling (board membership, ownership)
 
 ---
-
-## 📄 License
-
-This project is for educational purposes.
