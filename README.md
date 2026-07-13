@@ -24,6 +24,15 @@ The frontend is hosted separately and communicates with this backend through RES
 
 You can test the live demo here: [Kanmind Live Demo](https://kanmind.alexander-putilin.de/)
 
+---
+
+## Frontend
+
+The frontend for this project is available in a separate repository:
+https://github.com/AlexPutilin/KanMind_Frontend
+
+---
+
 ## Installation
 
 1. Clone the repository:
